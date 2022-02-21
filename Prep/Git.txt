@@ -1,0 +1,13 @@
+25. what is version control system? what is git?
+Version control system is use to work, manage and control the working with the versions of
+a software. It provides different functionality such as marking versions, making branches,
+switching between the versions so the software could be managed efficiently.
+Git is a famous version control system that is used in github, gitbucket etc as their version
+control.
+26. What is master, develop and feature branch is used for?
+The master branch is the main branch that is deployed and is in production.
+The develop branch is the branch where the developed features are pushed so that they
+could be accumulated there and then after proper testing could be pushed to the master
+branch.
+The feature branch are the branched of develop that are dedicated to the development of the
+features by the developer. These are the branches made by the developers for their working.

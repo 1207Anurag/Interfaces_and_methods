@@ -1,26 +1,38 @@
-// when a new Goroutine executed, the Goroutine call return immediately. The control does not wait for 
-///Goroutine to complete their execution just like normal function they always move forward to the next line 
-//after the Goroutine call and ignores the value returned by the Goroutine. 
 package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"strconv"
+	"sync"
 	"time"
 )
-func main(){
-	 fmt.Println("Main start")
-    go f("direct")
-     fmt.Println("Main finished")
-	 time.Sleep(1*time.Second)
-//adding sleep() method in programm makes go routine sleep for 1 second
-//in between this 1 sec new goroutien executes and display these numbers on the screen
-	 
 
-}
-
-func f(from string){
-	for i:=0;i<3;i++{
-		fmt.Println(from,":",i)
+func CallUrl(id string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	res, err := http.Get("https://jsonplaceholder.typicode.com/posts" + id)
+	if err != nil {
+		fmt.Println("error accessing URL")
+	} else {
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			fmt.Println("cannot read body of Response")
+		} else {
+			fmt.Println(string(body))
+		}
 	}
 }
 
+func main() {
+	st := time.Now()
+	wg := new(sync.WaitGroup)
+	wg.Add(200)
+	for i := 1; i <= 200; i++ {
+		id := strconv.Itoa(i)
+		go CallUrl(id, wg)
+	}
+	wg.Wait()
+	diff := time.Since(st)
+	fmt.Printf("Total Time taken %d", diff)
+}
