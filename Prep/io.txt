@@ -1,0 +1,9 @@
+//provides basic interfaces of io primitives. 
+//because of these interfaces and primitives wrap lower-level operations with various 
+//implementations unless otherwise informed clients should not assume they are safe for parllel execution
+
+//various functions of io package 
+-> pipe
+-> ReadAll
+-> Copy
+-> 
