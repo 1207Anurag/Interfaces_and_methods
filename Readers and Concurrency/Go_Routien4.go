@@ -79,12 +79,12 @@ func CallUrl4(id string, wg *sync.WaitGroup) {
 		}
 	}
 }
-848170675
-1153234471
+// 848170675
+// 1153234471
 func main() {
 	st := time.Now()
 	wg := new(sync.WaitGroup)
-	wg.Add(200)
+	wg.Add(5)
 	for i := 1; i <= 200; i++ {
 		id := strconv.Itoa(i)
 		go CallUrl(id, wg)
